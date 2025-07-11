@@ -1,7 +1,7 @@
 import ccxt
 import time
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from analyse import compute_indicators, generate_signal
 from utils import send_telegram_message, log_signal
 from config import BINANCE_API_KEY, BINANCE_API_SECRET
@@ -37,7 +37,7 @@ def fetch_ohlcv(symbol):
     offset = server_time - local_time
     print(f"[{symbol}] Décalage ajusté : {offset} ms")
 
-    since = (datetime.now(tz=datetime.UTC) - timedelta(days=30)).timestamp() * 1000
+    since = (datetime.now(tz=timezone.utc) - timedelta(days=30)).timestamp() * 1000
     since += offset
 
     ohlcv = exchange.fetch_ohlcv(
