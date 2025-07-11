@@ -7,7 +7,7 @@ def compute_indicators(df):
     df['sma50'] = ta.trend.sma_indicator(df['close'], window=50)
     df['ema9'] = ta.trend.ema_indicator(df['close'], window=9)
     df['rsi'] = ta.momentum.rsi(df['close'], window=14)
-    macd = ta.trend.macd(df['close'])
+    macd = ta.trend.MACD(df['close'])
     df['macd'] = macd.macd()
     df['macd_signal'] = macd.macd_signal()
     df['volume_ma'] = df['volume'].rolling(window=20).mean()
