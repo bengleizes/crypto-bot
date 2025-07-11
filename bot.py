@@ -44,7 +44,6 @@ def fetch_ohlcv(symbol):
         symbol,
         timeframe='1h',
         since=int(since),
-        params={"recvWindow": 30000}  # 30 secondes de marge maximale
     )
     df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
     df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
