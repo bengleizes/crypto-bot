@@ -58,4 +58,5 @@ while True:
             stacktrace = traceback.format_exc()
             print(f"Erreur sur {symbol} : {e}")
             send_telegram_message(f"⛔ Erreur sur {symbol} :\n{e}\n{stacktrace}")
+            send_telegram_message("✅ Bot exécuté sans erreur. Pas de signal détecté pour le moment.")
     time.sleep(3600)
