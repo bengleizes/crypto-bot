@@ -37,7 +37,7 @@ def fetch_ohlcv(symbol):
     offset = server_time - local_time
     print(f"[{symbol}] Décalage ajusté : {offset} ms")
 
-    since = (datetime.utcnow() - timedelta(days=30)).timestamp() * 1000
+    since = (datetime.now(tz=datetime.UTC) - timedelta(days=30)).timestamp() * 1000
     since += offset
 
     ohlcv = exchange.fetch_ohlcv(
