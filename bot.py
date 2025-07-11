@@ -57,7 +57,7 @@ while True:
             df = compute_indicators(df)
             signal, reason = generate_signal(df)
             if signal:
-                message = f"[{datetime.utcnow()}] Signal {signal} détecté sur {symbol} : {reason}"
+                message = f"[{datetime.now(tz=timezone.utc)}] Signal {signal} détecté sur {symbol} : {reason}"
                 send_telegram_message(message)
                 log_signal(symbol, signal, reason)
         except Exception as e:
