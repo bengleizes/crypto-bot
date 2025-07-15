@@ -1,4 +1,5 @@
 import ccxt
+import os
 import time
 import pandas as pd
 from datetime import datetime, timedelta, timezone
@@ -6,13 +7,19 @@ from analyse import compute_indicators, generate_signal
 from utils import send_telegram_message, log_signal
 from config import BINANCE_API_KEY, BINANCE_API_SECRET
 
-exchange = ccxt.binance({
-    'apiKey': BINANCE_API_KEY,
-    'secret': BINANCE_API_SECRET,
+class SafeBinance(ccxt.binance):
+    def fetch_currencies(self, params={}):
+        return {}
+
+    def sapi_get_margin_allpairs(self, params={}):
+        return []  # ⛔ on neutralise explicitement cet appel bloquant
+
+exchange = SafeBinance({
+    'apiKey': os.getenv("BINANCE_API_KEY"),
+    'secret': os.getenv("BINANCE_API_SECRET"),
     'enableRateLimit': True,
     'options': {
-        'adjustForTimeDifference': False,
-        'fetchCurrencies': False
+        'adjustForTimeDifference': False
     }
 })
 
