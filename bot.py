@@ -12,9 +12,7 @@ exchange = ccxt.binance({
     'enableRateLimit': True,
     'options': {
         'adjustForTimeDifference': False,
-        'exclude': {
-            'fetchCurrencies': True
-        }
+        'fetchCurrencies': False
     }
 })
 
